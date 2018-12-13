@@ -1,0 +1,56 @@
+.bg-3 {
+	background-color: #ffffff;
+	color: #555555;
+}
+.container-fluid {
+	padding-top: 10px;
+	padding-bottom: 70px;
+}
+.navbar {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border: 0;
+	border-radius: 0;
+	margin-bottom: 0;
+	font-size: 12px;
+	letter-spacing: 5px;
+}
+.navbar-nav li a:hover {
+	color: #0064d3 !important;
+}
+.active > a {
+	color: #0064d3 !important;
+	font: bold;
+}
+.col-sm4 {
+	padding-top: 100px;
+}
+.search-box {
+	padding: 20px;
+	padding-bottom: 100px;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.faq {
+	position: relative;
+}
+/* LoginButton Style from magnet4blogging.net */
+.LoginButton {
+	color: #fff !important;
+	text-transform: uppercase;
+	background: #ed3330;
+	padding: 20px;
+	border-radius: 5px;
+	display: inline-block;
+	border: none;
+}
+
+.LoginButton:hover {
+	background: #434343;
+	letter-spacing: 1px;
+	-webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+	-moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+	box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
+	transition: all 0.4s ease 0s;
+}
