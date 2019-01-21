@@ -1,7 +1,6 @@
 /**
  * example eBay API request to FindingService:findItemsByKeywords
  */
-var ebay = require("./test");
 
 var createError = require("http-errors");
 var express = require("express");
