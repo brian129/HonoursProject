@@ -7,15 +7,15 @@ var params = {
 	keywords: ["p20 pro"],
 
 	// add additional fields
-	outputSelector: ["AspectHistogram"],
+	outputSelector: ["CategoryHistogram"],
 
 	paginationInput: {
 		entriesPerPage: 10
 	},
 
 	itemFilter: [
-		/*{ name: "FreeShippingOnly", value: true },*/
-		{ name: "MaxPrice", value: "450" }
+		{ name: "SoldItemsOnly", value: true },
+		{ name: "MinPrice", value: "450" }
 	]
 
 	//domainFilter: [{ name: "domainName", value: "Digital_Cameras" }]
@@ -24,12 +24,20 @@ var params = {
 // index page
 router.get("/", function(req, res, next) {
 	res.render("index", { page: "Home", menuId: "home" });
-	ebay.getItems(params);
+	ebay.fetchItems(params);
 });
 
 //search page
 router.get("/search", function(req, res, next) {
 	res.render("search", { page: "Search", menuId: "search" });
+	ebay.getItemDetails(201242679917);
+	console.log("search page");
+});
+
+router.get("/send", function(req, res, next) {
+	res.render("searching", { page: "Searching", menuId: "searching" });
+	ebay.getItemDetails(req.body.ebayId);
+	console.log("send page");
 });
 
 // about page
