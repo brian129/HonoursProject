@@ -12,7 +12,7 @@
 			<% if (message.length > 0) { %>
 			<div class="alert alert-danger"><%= message %></div>
 			<% } %>
-			<form action="/login" method="post">
+			<form action="/signup" method="post">
 				<div class="form-group">
 					<label>Username</label>
 					<input type="text" class="form-control" name="username" />
@@ -24,11 +24,9 @@
 					<label>Password</label>
 					<input type="text" class="form-control" name="password" />
 				</div>
-				<button type="submit" class="btn btn-success btn-lg">Login</button>
+				<button type="submit" class="btn btn-success btn-lg">Register</button>
 			</form>
 			<hr />
-
-			<p>Need an account <a href="/signup">Register</a></p>
 			<p>Go Back <a href="/">Home</a>.</p>
 		</div>
 	</body>

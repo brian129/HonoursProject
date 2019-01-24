@@ -9,14 +9,16 @@ connection.query("USE " + dbconfig.database);
 
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done) {
-		done(null, user, id);
+		done(null, user.id);
 	});
 
 	passport.deserializeUser(function(id, done) {
-		connection,
-			query("SELECT * FROM users WHERE id = ?", [id], function(err, rows) {
-				done(err, rows[0]);
-			});
+		connection.query("SELECT * FROM users WHERE id = ? ", [id], function(
+			err,
+			rows
+		) {
+			done(err, rows[0]);
+		});
 	});
 
 	passport.use(
@@ -29,7 +31,7 @@ module.exports = function(passport) {
 			},
 			function(req, username, password, done) {
 				connection.query(
-					"SELECT * FROM users WHERE username = ?",
+					"SELECT * FROM users WHERE username = ? ",
 					[username],
 					function(err, rows) {
 						if (err) return done(err);
@@ -44,8 +46,9 @@ module.exports = function(passport) {
 								username: username,
 								password: bcrypt.hashSync(password, null, null)
 							};
+
 							var insertQuery =
-								"INSET INTO users (username, password) values (?, ?)";
+								"INSERT INTO users (username, password) values (?, ?)";
 
 							connection.query(
 								insertQuery,
@@ -62,6 +65,7 @@ module.exports = function(passport) {
 			}
 		)
 	);
+
 	passport.use(
 		"local-login",
 		new LocalStrategy(
@@ -72,7 +76,7 @@ module.exports = function(passport) {
 			},
 			function(req, username, password, done) {
 				connection.query(
-					"SELECT * FORM users WHERE username = ? ",
+					"SELECT * FROM users WHERE username = ? ",
 					[username],
 					function(err, rows) {
 						if (err) return done(err);

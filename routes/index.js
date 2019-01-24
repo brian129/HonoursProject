@@ -12,12 +12,14 @@ module.exports = function(app, passport) {
 		res.render("search", { page: "Search", menuId: "search" });
 	});
 
+	/* not used anymore
 	app.get("/send", function(req, res, next) {
 		res.render("searching", { page: "Searching", menuId: "searching" });
 	});
+	*/
 
-	// about page
-	app.get("/login", function(req, res) {
+	// login page
+	app.get("/login", function(req, res, next) {
 		res.render("login", {
 			page: "Login",
 			menuId: "login",
@@ -42,6 +44,7 @@ module.exports = function(app, passport) {
 		}
 	);
 
+	//signup page
 	app.get("/signup", function(req, res) {
 		res.render("signup", {
 			page: "Sign Up",
@@ -59,6 +62,7 @@ module.exports = function(app, passport) {
 		})
 	);
 
+	// profile page
 	app.get("profile", isLoggedIn, function(req, res) {
 		res.render("profile", {
 			page: "Profile",
@@ -77,10 +81,8 @@ module.exports = function(app, passport) {
 	});
 };
 
-function is isLoggedIn(req, res, next){
-	if(req.isAuthenticated())
-	return next();
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) return next();
 
-	res.redirect('/');
-
+	res.redirect("/");
 }
