@@ -62,6 +62,7 @@ module.exports = function(passport) {
 						}
 					}
 				);
+				connection.release();
 			}
 		)
 	);
@@ -79,21 +80,27 @@ module.exports = function(passport) {
 					"SELECT * FROM users WHERE username = ? ",
 					[username],
 					function(err, rows) {
-						if (err) return done(err);
+						if (err) {
+							console.log("[mySQL error]" + err);
+							return done(err);
+						}
+
 						if (!rows.length) {
 							return done(
 								null,
 								false,
-								req.flash("loginMessage", "No User Found")
+								req.flash("loginMessage", "No User Found"),
+								console.log(bcrypt.hashSync("12345", null, null))
 							);
 						}
-						if (!bcrypt.compareSync(password, rows[0].password))
+						if (!bcrypt.compareSync(password, rows.password))
 							return done(
 								null,
 								false,
-								req.flash("loginMessage", "Wrong Password")
+								req.flash("loginMessage", "Wrong Password"),
+								console.log("not correct")
 							);
-
+						console.log("successful");
 						return done(null, rows[0]);
 					}
 				);
