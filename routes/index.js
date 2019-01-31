@@ -30,7 +30,7 @@ module.exports = function(app, passport) {
 	app.post(
 		"/login",
 		passport.authenticate("local-login", {
-			successRedirect: "/search",
+			successRedirect: "/profile",
 			failureRedirect: "/login",
 			failureFlash: true
 		}),
@@ -56,14 +56,14 @@ module.exports = function(app, passport) {
 	app.post(
 		"/signup",
 		passport.authenticate("local-signup", {
-			successRedirect: "/search",
+			successRedirect: "/profile",
 			failureRedirect: "/signup",
 			failureFlash: true
 		})
 	);
 
 	// profile page
-	app.get("profile", isLoggedIn, function(req, res) {
+	app.get("/profile", isLoggedIn, function(req, res) {
 		res.render("profile", {
 			page: "Profile",
 			menuId: "profile",

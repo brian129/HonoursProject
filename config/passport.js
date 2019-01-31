@@ -78,27 +78,21 @@ module.exports = function(passport) {
 					"SELECT * FROM users WHERE username = ? ",
 					[username],
 					function(err, rows) {
-						if (err) {
-							console.log("[mySQL error]" + err);
-							return done(err);
-						}
-
+						if (err) return done(err);
 						if (!rows.length) {
 							return done(
 								null,
 								false,
-								req.flash("loginMessage", "No User Found"),
-								console.log(bcrypt.hashSync("12345", null, null))
+								req.flash("loginMessage", "No User Found")
 							);
 						}
-						if (!bcrypt.compareSync(password, rows.password))
+						if (!bcrypt.compareSync(password, rows[0].password))
 							return done(
 								null,
 								false,
-								req.flash("loginMessage", "Wrong Password"),
-								console.log("not correct")
+								req.flash("loginMessage", "Wrong Password")
 							);
-						console.log("successful");
+
 						return done(null, rows[0]);
 					}
 				);
