@@ -1,11 +1,12 @@
 var LocalStrategy = require("passport-local").Strategy;
 
-var mysql = require("mysql");
+var pool = require("./database");
 var bcrypt = require("bcrypt-nodejs");
 var dbconfig = require("./database");
-var connection = mysql.createConnection(dbconfig.connection);
+//var connection = mysql.createConnection(dbconfig.connection);
 
-connection.query("USE " + dbconfig.database);
+//connection.query("USE " + dbconfig.database);
+pool.query("USE " + dbconfig.database);
 
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done) {
@@ -13,10 +14,7 @@ module.exports = function(passport) {
 	});
 
 	passport.deserializeUser(function(id, done) {
-		connection.query("SELECT * FROM users WHERE id = ? ", [id], function(
-			err,
-			rows
-		) {
+		pool.query("SELECT * FROM users WHERE id = ? ", [id], function(err, rows) {
 			done(err, rows[0]);
 		});
 	});
@@ -30,7 +28,7 @@ module.exports = function(passport) {
 				passReqToCallback: true
 			},
 			function(req, username, password, done) {
-				connection.query(
+				pool.query(
 					"SELECT * FROM users WHERE username = ? ",
 					[username],
 					function(err, rows) {
@@ -50,7 +48,7 @@ module.exports = function(passport) {
 							var insertQuery =
 								"INSERT INTO users (username, password) values (?, ?)";
 
-							connection.query(
+							pool.query(
 								insertQuery,
 								[newUserMysql.username, newUserMysql.password],
 								function(err, rows) {
@@ -62,7 +60,7 @@ module.exports = function(passport) {
 						}
 					}
 				);
-				connection.release();
+				//connection.release();
 			}
 		)
 	);
@@ -76,7 +74,7 @@ module.exports = function(passport) {
 				passReqToCallback: true
 			},
 			function(req, username, password, done) {
-				connection.query(
+				pool.query(
 					"SELECT * FROM users WHERE username = ? ",
 					[username],
 					function(err, rows) {
