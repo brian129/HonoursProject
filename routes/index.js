@@ -4,12 +4,12 @@ module.exports = function(app, passport) {
 
 	// index page
 	app.get("/", function(req, res, next) {
-		res.render("index", { page: "Home", menuId: "home" });
+		res.render("index", { page: "Home", menuId: "home", user: req.user });
 	});
 
 	//search page
 	app.get("/search", function(req, res, next) {
-		res.render("search", { page: "Search", menuId: "search" });
+		res.render("search", { page: "Search", menuId: "search", user: req.user });
 	});
 
 	/* not used anymore
@@ -23,7 +23,8 @@ module.exports = function(app, passport) {
 		res.render("login", {
 			page: "Login",
 			menuId: "login",
-			message: req.flash("loginMessage")
+			message: req.flash("loginMessage"),
+			user: req.user
 		});
 	});
 
@@ -49,7 +50,8 @@ module.exports = function(app, passport) {
 		res.render("signup", {
 			page: "Sign Up",
 			menuId: "singup",
-			message: req.flash("signupMessage")
+			message: req.flash("signupMessage"),
+			user: req.user
 		});
 	});
 
@@ -77,7 +79,7 @@ module.exports = function(app, passport) {
 
 	// faq page
 	app.get("/faq", function(req, res) {
-		res.render("faq", { page: "FAQ", menuId: "faq" });
+		res.render("faq", { page: "FAQ", menuId: "faq", user: req.user });
 	});
 };
 

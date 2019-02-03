@@ -37,7 +37,10 @@ module.exports = function(passport) {
 							return done(
 								null,
 								false,
-								req.flash("signupMessage", "That is already taken")
+								req.flash(
+									"signupMessage",
+									"The username has already been taken!"
+								)
 							);
 						} else {
 							var newUserMysql = {

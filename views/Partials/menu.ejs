@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" y>
 	<div class="container">
 		<div class="navbar-header">
 			<button
@@ -16,7 +16,11 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li id="search"><a href="/search">SEARCH</a></li>
 				<li id="faq"><a href="/faq">FAQ</a></li>
+				<% if (typeof user =='undefined'){ %>
 				<li id="login"><a href="/login">Login/Register</a></li>
+				<% }else{ %>
+				<li id="profile"><a href="/profile">Account: <%=user.username%></a></li>
+				<% } %>
 			</ul>
 		</div>
 	</div>
