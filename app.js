@@ -38,7 +38,7 @@ require("./routes/index.js")(app, passport);
 app.listen(port);
 console.log("Port: " + port);
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("public"));
 app.use(function(err, req, res, next) {
 	// set locals, only providing error in development
 	res.locals.message = err.message;

@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<% include partials/head %>
+	</head>
 
-<head>
-  <% include partials/head %>
-</head>
-
-<body>
-  <% include partials/menu %>
-  <div class="container-fluid bg-5 text-left">
-    <h1>
-      <%= page %>
-    </h1><br>
-<div class="row-sm-4 text-center">
-    <button class="btn btn-dark" type="submit" aly='login' onClick="location.href='login'">Login or Register</button></div>
-    <br>
-</div>
-    <div class="col-sm-12 text-center">
-      <p>*name* is a web app designed to help you track the selling prices of the product you want on eBay.</p>
-      <p>Giving you to best advantage to get the right thing, at the right price.</p>
-    </div>
-    <div class="col-sm-12 text-center">
-      <p>Simply create an account or login to start.</p>
-    </div>
-  </div>
-  </div>
-</body>
-<% include partials/script %>
-
+	<body>
+		<% include partials/menu %>
+		<div class="view">
+			<br />
+			<div class="jumbotron w-50 py-5 mx-auto">
+				<div
+					class="card-body d-flex flex-column justify-content-center align-items-center"
+				>
+					<p>
+						*name* is a web app designed to help you track the selling prices of
+						the product you want on eBay.
+					</p>
+					<p>
+						Giving you to best advantage to get the <b>right thing</b>, at the
+						<b>right price</b>.
+					</p>
+					<p>Simply create an account or login to start.</p>
+					<button
+						class="btn btn-dark mt-auto"
+						type="submit"
+						aly="login"
+						onClick="location.href='login'"
+					>
+						Login or Register
+					</button>
+				</div>
+			</div>
+			<br />
+		</div>
+	</body>
+	<% include partials/script %>
 </html>

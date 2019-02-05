@@ -7,16 +7,14 @@ module.exports = function(app, passport) {
 		res.render("index", { page: "Home", menuId: "home", user: req.user });
 	});
 
-	//search page
-	app.get("/search", function(req, res, next) {
-		res.render("search", { page: "Search", menuId: "search", user: req.user });
+	//record page
+	app.get("/record", function(req, res, next) {
+		res.render("record", {
+			page: "Add Record",
+			menuId: "record",
+			user: req.user
+		});
 	});
-
-	/* not used anymore
-	app.get("/send", function(req, res, next) {
-		res.render("searching", { page: "Searching", menuId: "searching" });
-	});
-	*/
 
 	// login page
 	app.get("/login", function(req, res, next) {
@@ -80,6 +78,15 @@ module.exports = function(app, passport) {
 	// faq page
 	app.get("/faq", function(req, res) {
 		res.render("faq", { page: "FAQ", menuId: "faq", user: req.user });
+	});
+
+	app.get("/list", function(req, res) {
+		res.render("list", {
+			page: "List",
+			menuId: "list",
+			user: req.user,
+			list: [1, 2, 3]
+		});
 	});
 };
 
