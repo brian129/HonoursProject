@@ -69,7 +69,7 @@ body {
   text-align: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("./../images/background.jpg")!important; }
+  background-image: url("./../images/background1.jpg")!important; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }

@@ -7,9 +7,9 @@
 	<body>
 		<% include partials/menu %>
 		<section id="forms" class="container py-5">
-			<div class="card h-200 mt-auto">
+			<div class="card mx-auto">
 				<div
-					class="card-body d-flex flex-column justify-content-center align-items-center"
+					class="card-body d-flex flex-column justify-content-center  align-items-center"
 				>
 					<% if (message.length > 0) { %>
 					<div class="alert alert-danger "><%= message %></div>
@@ -19,7 +19,7 @@
 							<label class="col-sm-4 col-form-label form-control-label"
 								>Username</label
 							>
-							<div class="col-sm-10">
+							<div class="col-sm-8">
 								<input type="text" class="form-control" name="username" />
 							</div>
 						</div>
@@ -27,7 +27,7 @@
 							<label class="col-sm-4 col-form-label form-control-label"
 								>Password</label
 							>
-							<div class="col-sm-10">
+							<div class="col-sm-8">
 								<input type="password" class="form-control" name="password" />
 							</div>
 						</div>
