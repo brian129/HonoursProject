@@ -2,114 +2,177 @@
 <html lang="en">
 	<head>
 		<% include partials/head %>
-		<!--  jQuery -->
-		<script
-			type="text/javascript"
-			src="https://code.jquery.com/jquery-1.11.3.min.js"
-		></script>
-
-		<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-		<link
-			rel="stylesheet"
-			href="https://formden.com/static/cdn/bootstrap-iso.css"
-		/>
-
-		<!-- Bootstrap Date-Picker Plugin -->
-		<script
-			type="text/javascript"
-			src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"
-		></script>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"
-		/>
 	</head>
 
 	<body>
 		<% include partials/menu %>
-		<section id="forms" class="container py-5 mx-auto">
-			<div class="row">
-				<div class="col-md-12">
-					<form role="form">
-						<div class="form-group row mx-auto">
-							<label
-								class="col-md-2 col-form-label form-control-label text-muted"
-								>Item Name</label
-							>
-
-							<div class="col-md-4">
-								<input class="form-control" type="text" value="" id="name" />
-							</div>
+		<section id="forms" class="container card mx-auto py-5 ">
+			<div
+				class="card-body d-flex flex-column justify-content-center align-items-left"
+			>
+				<form role="form" action="/record" method="POST">
+					<!--Product Name Element-->
+					<div class="form-group row">
+						<label for="name" class="col-2 col-form-label float-left ml-3"
+							>Product Name</label
+						>
+						<div class="col-10">
+							<input id="name" name="name" type="text" class="form-control" />
 						</div>
-						<div class="form-group row mx-auto">
-							<label
-								class="col-md-2 col-form-label form-control-label text-muted"
-								>Category</label
-							>
-							<div class="col-md-4 dropdown">
-								<select
-									class="browser-default custom-select form-control"
-									style="height:35px"
-									id="category"
-								>
-									<option disabled selected>Select Category</option>
-									<option>Fashion</option>
-									<option>Home & Garden</option>
-									<option>Electronics</option>
-									<option>Sports, Hobbies & Leisure</option>
-									<option>Collectible & Art</option>
-									<option>Health & Beauty</option>
-									<option>Motors</option>
-									<option>Other Categories</option>
-								</select>
-							</div>
+					</div>
+					<hr />
+					<!--Category Element-->
+					<div class="form-group row">
+						<label class="col-2 col-form-label float-left ml-3" for="category"
+							>Category</label
+						>
+						<div class="col-10">
+							<select id="category" name="category" class="custom-select">
+								<option disabled selected>Select Category</option>
+								<option value="1">Fashion</option>
+								<option value="2">Home & Garden</option>
+								<option value="3">Electronics</option>
+								<option value="4">Sports, Hobbies & Leisure</option>
+								<option value="5">Collectable & Art</option>
+								<option value="6">Health & Beauty</option>
+								<option value="7">Motors</option>
+								<option value="8">Other Categories</option>
+							</select>
 						</div>
-						<div class="form-group row mx-auto">
-							<label
-								class="col-md-2 col-form-label form-control-label text-muted"
-								>Buying Format</label
-							>
-							<div class="col-md-4 radio-custom" id="buyingFormat">
-								<label class="radio-inline"
-									><input
-										type="radio"
-										name="formatRadio"
-										checked
-									/>Auction</label
-								>
-								<label class="radio-inline"
-									><input type="radio" name="formatRadio" />Buy It Now</label
+					</div>
+					<!--Buying Format Radio Button-->
+					<div class="form-group row">
+						<label class="col-2 col-form-label float-left ml-3"
+							>Buying Format</label
+						>
+						<div class="col-10">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input
+									name="buyingFormat"
+									id="buyingFormat_0"
+									type="radio"
+									class="custom-control-input"
+									value="auction"
+								/>
+								<label for="buyingFormat_0" class="custom-control-label"
+									>Auction</label
 								>
 							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input
+									name="buyingFormat"
+									id="buyingFormat_1"
+									type="radio"
+									class="custom-control-input"
+									value="buyItNow"
+								/>
+								<label for="buyingFormat_1" class="custom-control-label"
+									>Buy It Now</label
+								>
+							</div>
 						</div>
-						<div class="form-group row mx-auto">
-							<label
-								class="col-md-2 col-form-label form-control-label text-muted"
-								>Date Ended</label
-							>
+					</div>
+					<!--Date Ended Datepicker-->
+					<div class="form-group row mx-auto">
+						<label class="col-2 col-form-label float-left ml-3"
+							>Date Ended</label
+						>
+						<input
+							class="col-md-4 datepicker form-control"
+							type="date"
+							name="dateEnded"
+						/>
+					</div>
+					<!--Sold/Unsold Radio Button-->
+					<div class="form-group row">
+						<label class="col-2 col-form-label float-left ml-3"
+							>Sold/Unsold</label
+						>
+						<div class="col-10">
+							<div class="custom-control custom-radio custom-control-inline">
+								<input
+									name="soldStatus"
+									id="soldStatus_0"
+									type="radio"
+									class="custom-control-input"
+									value="sold"
+								/>
+								<label for="soldStatus_0" class="custom-control-label"
+									>Sold</label
+								>
+							</div>
+							<div class="custom-control custom-radio custom-control-inline">
+								<input
+									name="soldStatus"
+									id="soldStatus_1"
+									type="radio"
+									class="custom-control-input"
+									value="unsold"
+								/>
+								<label for="soldStatus_1" class="custom-control-label"
+									>Unsold</label
+								>
+							</div>
+						</div>
+					</div>
+					<!--Ending Price ELement-->
+					<div class="form-group row">
+						<label
+							for="endingPrice"
+							class="col-2 col-form-label float-left ml-3"
+							>Item Ending Price</label
+						>
+						<div class="col-10">
 							<input
-								class="col-md-4 datepicker imput-sm form-control"
-								type="date"
-								name="dateEnded"
+								id="endingPrice"
+								name="endingPrice"
+								type="text"
+								class="form-control"
 							/>
 						</div>
-
-						<div class="form-group row">
-							<div class="col-lg-10">
-								<input
-									type="reset"
-									class="btn btn-outline-secondary mr-2"
-									value="Cancel"
-								/>
-								<input
-									type="button"
-									class="btn btn-primary mr-2"
-									value="Submit"
-								/>
-							</div>
+					</div>
+					<!--Postage Price Element-->
+					<div class="form-group row">
+						<label
+							for="postagePrice"
+							class="col-2 col-form-label float-left ml-3"
+							>Postage Price</label
+						>
+						<div class="col-10">
+							<input
+								id="postagePrice"
+								name="postagePrice"
+								type="text"
+								class="form-control"
+								aria-describedby="postagePriceHelpBlock"
+							/>
+							<span id="postagePriceHelpBlock" class="form-text text-muted"
+								>The Postage and Packaging cost</span
+							>
 						</div>
-					</form>
-				</div>
+					</div>
+					<!--Condition Dropdown-->
+					<div class="form-group row">
+						<label for="condition" class="col-2 col-form-label float-left ml-3"
+							>Condition</label
+						>
+						<div class="col-10">
+							<select id="condition" name="condition" class="custom-select">
+								<option value="new">New</option>
+								<option value="used">Used</option>
+								<option value="refurbished">Refurbished</option>
+							</select>
+						</div>
+					</div>
+					<!--Submit Button-->
+					<div class="form-group row">
+						<div class="offset-2 col-10">
+							<button name="submit" type="submit" class="btn btn-primary mr-2">
+								Submit
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</section>
 	</body>

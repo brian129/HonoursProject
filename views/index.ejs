@@ -20,15 +20,39 @@
 						Giving you to best advantage to get the <b>right thing</b>, at the
 						<b>right price</b>.
 					</p>
+					<% if (typeof user !='undefined'){ %>
+					<p>
+						Visit your Profile to see your existing records or add a record of a
+						new item below.
+					</p>
+					<button
+						class="btn btn-dark mt-auto"
+						type="submit"
+						alt="Profile"
+						onClick="location.href='profile'"
+					>
+						Profile
+					</button>
+					<hr />
+					<button
+						class="btn btn-dark mt-auto"
+						type="submit"
+						alt="New Record"
+						onClick="location.href='record'"
+					>
+						Add Item
+					</button>
+					<% } else { %>
 					<p>Simply create an account or login to start.</p>
 					<button
 						class="btn btn-dark mt-auto"
 						type="submit"
-						aly="login"
+						alt="login"
 						onClick="location.href='login'"
 					>
 						Login or Register
 					</button>
+					<% } %>
 				</div>
 			</div>
 			<br />
