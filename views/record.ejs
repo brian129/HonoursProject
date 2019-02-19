@@ -6,53 +6,62 @@
 
 	<body>
 		<% include partials/menu %>
-		<section id="forms" class="container card mx-auto py-5 ">
-			<div
-				class="card-body d-flex flex-column justify-content-center align-items-left"
-			>
+		<section id="forms" class="container card mx-auto my-2">
+			<div class="card-body d-flex flex-column align-items-right">
+				<h1>Add New Item</h1>
 				<form role="form" action="/record" method="POST">
 					<!--Product Name Element-->
 					<div class="form-group row">
-						<label for="name" class="col-2 col-form-label float-left ml-3"
+						<label for="name" class="col-xs col-form-label float-left ml-2"
 							>Product Name</label
 						>
-						<div class="col-10">
-							<input id="name" name="name" type="text" class="form-control" />
+						<div class="col-12">
+							<input
+								id="name"
+								name="name"
+								type="text"
+								class="form-control"
+								required
+							/>
 						</div>
+					</div>
+					<!--Add sub item textbox here-->
+					<div class="form-group row">
+						<label
+							for="subVersion"
+							class="col-xs col-form-label float-left text-muted ml-2"
+							>Sub Item/Version (optional)</label
+						>
+						<div class="col-12">
+							<input
+								id="subVersion"
+								name="subVersion"
+								type="text"
+								class="form-control"
+							/>
+						</div>
+						<span
+							class="help-block float-left text-muted ml-2"
+							id="hint_subVersion"
+						>
+							Specific version of an item
+						</span>
 					</div>
 					<hr />
-					<!--Category Element-->
-					<div class="form-group row">
-						<label class="col-2 col-form-label float-left ml-3" for="category"
-							>Category</label
-						>
-						<div class="col-10">
-							<select id="category" name="category" class="custom-select">
-								<option disabled selected>Select Category</option>
-								<option value="1">Fashion</option>
-								<option value="2">Home & Garden</option>
-								<option value="3">Electronics</option>
-								<option value="4">Sports, Hobbies & Leisure</option>
-								<option value="5">Collectable & Art</option>
-								<option value="6">Health & Beauty</option>
-								<option value="7">Motors</option>
-								<option value="8">Other Categories</option>
-							</select>
-						</div>
-					</div>
 					<!--Buying Format Radio Button-->
 					<div class="form-group row">
-						<label class="col-2 col-form-label float-left ml-3"
+						<label class="col-xs col-form-label float-left ml-2"
 							>Buying Format</label
 						>
-						<div class="col-10">
+						<div class="col-12">
 							<div class="custom-control custom-radio custom-control-inline">
 								<input
 									name="buyingFormat"
 									id="buyingFormat_0"
 									type="radio"
-									class="custom-control-input"
+									class="custom-control-input form-control"
 									value="auction"
+									checked="checked"
 								/>
 								<label for="buyingFormat_0" class="custom-control-label"
 									>Auction</label
@@ -63,7 +72,7 @@
 									name="buyingFormat"
 									id="buyingFormat_1"
 									type="radio"
-									class="custom-control-input"
+									class="custom-control-input form-control"
 									value="buyItNow"
 								/>
 								<label for="buyingFormat_1" class="custom-control-label"
@@ -72,30 +81,50 @@
 							</div>
 						</div>
 					</div>
+					<hr />
 					<!--Date Ended Datepicker-->
 					<div class="form-group row mx-auto">
-						<label class="col-2 col-form-label float-left ml-3"
+						<label class="col-xs col-form-label float-left ml-2"
 							>Date Ended</label
 						>
 						<input
-							class="col-md-4 datepicker form-control"
+							class="col-12 datepicker form-control"
 							type="date"
 							name="dateEnded"
+							value="2019-01-01"
 						/>
 					</div>
+					<hr />
+					<!--Time picker-->
+					<div class="form-group row mx-auto">
+						<label class="col-xs col-form-label float-left ml-2"
+							>Time Ended</label
+						>
+						<input
+							class="col-12 datepicker form-control"
+							type="time"
+							name="time"
+							value="12:00:00"
+						/>
+					</div>
+					<hr />
 					<!--Sold/Unsold Radio Button-->
 					<div class="form-group row">
-						<label class="col-2 col-form-label float-left ml-3"
+						<label class="col-xs col-form-label float-left ml-2"
 							>Sold/Unsold</label
 						>
-						<div class="col-10">
-							<div class="custom-control custom-radio custom-control-inline">
+						<div class="col-12">
+							<div
+								class="custom-control custom-radio custom-control-inline"
+								required
+							>
 								<input
 									name="soldStatus"
 									id="soldStatus_0"
 									type="radio"
-									class="custom-control-input"
-									value="sold"
+									class="custom-control-input form-control"
+									value="1"
+									checked="checked"
 								/>
 								<label for="soldStatus_0" class="custom-control-label"
 									>Sold</label
@@ -106,8 +135,8 @@
 									name="soldStatus"
 									id="soldStatus_1"
 									type="radio"
-									class="custom-control-input"
-									value="unsold"
+									class="custom-control-input form-control"
+									value="0"
 								/>
 								<label for="soldStatus_1" class="custom-control-label"
 									>Unsold</label
@@ -115,58 +144,78 @@
 							</div>
 						</div>
 					</div>
-					<!--Ending Price ELement-->
+					<hr />
+					<!--Ending Price Element-->
 					<div class="form-group row">
 						<label
 							for="endingPrice"
-							class="col-2 col-form-label float-left ml-3"
+							class="col-xs col-form-label float-left ml-2"
 							>Item Ending Price</label
 						>
-						<div class="col-10">
-							<input
-								id="endingPrice"
-								name="endingPrice"
-								type="text"
-								class="form-control"
-							/>
+						<div class="col-12">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="">£</span>
+
+								<input
+									id="endingPrice"
+									name="endingPrice"
+									type="number"
+									class="form-control"
+									required
+								/>
+							</div>
 						</div>
 					</div>
-					<!--Postage Price Element-->
-					<div class="form-group row">
-						<label
-							for="postagePrice"
-							class="col-2 col-form-label float-left ml-3"
-							>Postage Price</label
-						>
-						<div class="col-10">
-							<input
-								id="postagePrice"
-								name="postagePrice"
-								type="text"
-								class="form-control"
-								aria-describedby="postagePriceHelpBlock"
-							/>
-							<span id="postagePriceHelpBlock" class="form-text text-muted"
-								>The Postage and Packaging cost</span
-							>
-						</div>
-					</div>
+					<hr />
 					<!--Condition Dropdown-->
 					<div class="form-group row">
-						<label for="condition" class="col-2 col-form-label float-left ml-3"
+						<label for="condition" class="col-xs col-form-label float-left ml-2"
 							>Condition</label
 						>
-						<div class="col-10">
-							<select id="condition" name="condition" class="custom-select">
-								<option value="new">New</option>
-								<option value="used">Used</option>
-								<option value="refurbished">Refurbished</option>
+						<div class="col-12">
+							<select
+								id="condition"
+								name="condition"
+								class="custom-select form-control"
+								style="height:35px"
+							>
+								<option value="new"><b>New</b></option>
+								<option value="used"><b>Used</b></option>
+								<option value="likeNew"><b>&#160;&#160;Like New</b></option>
+								<option value="veryGood"><b>&#160;&#160;Very Good</b></option>
+								<option value="good"><b>&#160;&#160;Good</b></option>
+								<option value="acceptable"
+									><b>&#160;&#160;Acceptable</b></option
+								>
+								<option value="refurbished"><b>Refurbished</b></option>
+								<option value="faulty"><b>Faulty</b></option>
 							</select>
 						</div>
 					</div>
+					<hr />
+					<!--Addition Comments Element-->
+					<div class="form-group row">
+						<label
+							for="endingPrice"
+							class="col-xs col-form-label float-left ml-2"
+							>Additional Comments</label
+						>
+						<div class="col-12">
+							<input
+								id="comments"
+								name="comments"
+								type="text"
+								class="form-control"
+							/>
+						</div>
+						<span class="help-block float-left text-muted" id="hint_comments">
+							e.g. Boxed/Unboxed, missing parts
+						</span>
+					</div>
+					<hr />
 					<!--Submit Button-->
 					<div class="form-group row">
-						<div class="offset-2 col-10">
+						<div class="col-12">
 							<button name="submit" type="submit" class="btn btn-primary mr-2">
 								Submit
 							</button>
@@ -177,6 +226,7 @@
 		</section>
 	</body>
 	<script>
+		document.getElementById("dateEnded").value = new Date().toDateInputValue();
 		var today = new Date().toISOString().split("T")[0];
 		document.getElementsByName("dateEnded")[0].setAttribute("max", today);
 	</script>

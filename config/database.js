@@ -7,7 +7,6 @@ var pool = mysql.createPool({
 	password: "7634.sd.4367",
 	database: "fhungprojectdb"
 });
-//user_table: "users"
 
 pool.getConnection((err, connection) => {
 	if (err) {
@@ -24,4 +23,5 @@ pool.getConnection((err, connection) => {
 	if (connection) connection.release();
 	return;
 });
+
 module.exports = pool;

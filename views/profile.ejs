@@ -9,21 +9,12 @@
 		<div class="container-fluid bg-6 text-left">
 			<h1><%= page %></h1>
 			<div class="page-header text-center">
-				<h2>My Profile</h2>
+				<h2><%=user.username%>'s Profile</h2>
 				<a href="/logout" class="btn btn-danger btn-sm">Logout</a>
 			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<div class='well'>
-
-					
-				<h3><span class="fa fa-user"></span>Welcome <%=user.username%></h3>
-
-				<p>
-					<strong>id</strong> <%= user.id %> <br />
-					<strong>username</strong> <%= user.username %> <br />
-				</p></div>
-			</div>
+			<%for (var result in list){%>
+			<h1><%=result%>:<%=list[result]%></h1>
+			<%}%>
 		</div>
 	</body>
 	<% include partials/script %>

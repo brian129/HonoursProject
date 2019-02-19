@@ -1,6 +1,8 @@
 module.exports = function(app, passport) {
 	//var express = require("express");
 	//var router = express.Router();
+	var writeNew = require("../config/insertNewRecord");
+	var writeSub = require("../config/insertSubRecord");
 
 	// index page
 	app.get("/", function(req, res, next) {
@@ -14,6 +16,17 @@ module.exports = function(app, passport) {
 			menuId: "record",
 			user: req.user
 		});
+	});
+
+	app.post("/record", function(req, res) {
+		if (req.body.subVersion == "undefined") {
+			console.log("has a sub version");
+			writeNew(req);
+		} else if (req.body.subVersion != "undefined") {
+			writeSub(req);
+		}
+
+		res.redirect("/profile");
 	});
 
 	// login page
@@ -70,6 +83,7 @@ module.exports = function(app, passport) {
 			user: req.user
 		});
 	});
+
 	app.get("/logout", function(req, res) {
 		req.logout();
 		res.redirect("/");
