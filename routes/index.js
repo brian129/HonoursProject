@@ -3,6 +3,7 @@ module.exports = function(app, passport) {
 	//var router = express.Router();
 	var writeNew = require("../config/insertNewRecord");
 	var writeSub = require("../config/insertSubRecord");
+	var records = require("./../config/ProfileProducts");
 
 	// index page
 	app.get("/", function(req, res, next) {
@@ -19,14 +20,16 @@ module.exports = function(app, passport) {
 	});
 
 	app.post("/record", function(req, res) {
-		if (req.body.subVersion == "undefined") {
-			console.log("has a sub version");
-			writeNew(req);
-		} else if (req.body.subVersion != "undefined") {
-			writeSub(req);
+		console.log(req.body);
+		if (req.body.subVersion == "") {
+			writeNew.write(req).then(function() {
+				res.redirect("/profile");
+			});
+		} else if (req.body.subVersion != "") {
+			writeSub.write(req).then(function() {
+				res.redirect("/profile");
+			});
 		}
-
-		res.redirect("/profile");
 	});
 
 	// login page
@@ -77,11 +80,19 @@ module.exports = function(app, passport) {
 
 	// profile page
 	app.get("/profile", isLoggedIn, function(req, res) {
-		res.render("profile", {
-			page: "Profile",
-			menuId: "profile",
-			user: req.user
-		});
+		listPromise = records.getProducts(req.user.id);
+		listPromise
+			.then(function(list) {
+				res.render("profile", {
+					page: "Profile",
+					menuId: "profile",
+					user: req.user,
+					results: list
+				});
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
 	});
 
 	app.get("/logout", function(req, res) {

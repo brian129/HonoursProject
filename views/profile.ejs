@@ -6,15 +6,47 @@
 
 	<body>
 		<% include partials/menu %>
-		<div class="container-fluid bg-6 text-left">
-			<h1><%= page %></h1>
-			<div class="page-header text-center">
+		<div class="card mx-5">
+			<div
+				class="card-body d-flex flex-column justify-content-center  align-items-center"
+			>
 				<h2><%=user.username%>'s Profile</h2>
 				<a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+				</br>
+				</br>
+				<div class="table-responsive mx-auto">
+					<table class="table table-hover table-sm">
+						<tbody>
+							<tr>
+								<th class="w-25">Product</th>
+								<th class="w-50">Subitem</th>
+							</tr>
+							<!--Loop to print out everything in the array-->
+							<% for(var i=0; i < results.length; i++) { %>
+								<% for(var j = i; j <= results.length; j++) { %>
+									<% if(results[i].SubItem == results[i].Name && i != j) {	%>					
+										<tr>						
+											<td>
+												<%= results[i].Name %>
+											</td>
+											<td>
+											</td>
+										</tr>
+								<% } continue;%>
+								<% } %>
+								<tr>
+									<td>
+										<%= results[i].Name %>
+									</td>
+									<td>
+										<%= results[i].SubItem %>
+									</td>
+								</tr>
+							<% } %>												
+						</tbody>
+					</table>
+				</div>
 			</div>
-			<%for (var result in list){%>
-			<h1><%=result%>:<%=list[result]%></h1>
-			<%}%>
 		</div>
 	</body>
 	<% include partials/script %>

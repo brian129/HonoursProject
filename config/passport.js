@@ -2,11 +2,6 @@ var LocalStrategy = require("passport-local").Strategy;
 
 var pool = require("./database");
 var bcrypt = require("bcrypt-nodejs");
-var dbconfig = require("./database");
-//var connection = mysql.createConnection(dbconfig.connection);
-
-//connection.query("USE " + dbconfig.database);
-pool.query("USE " + dbconfig.database);
 
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done) {
@@ -63,7 +58,6 @@ module.exports = function(passport) {
 						}
 					}
 				);
-				//connection.release();
 			}
 		)
 	);

@@ -85,6 +85,10 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-image: url("./../images/background1.jpg") !important;
+	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 [tabindex="-1"]:focus {
