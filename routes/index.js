@@ -4,6 +4,7 @@ module.exports = function(app, passport) {
 	var writeNew = require("../config/insertNewRecord");
 	var writeSub = require("../config/insertSubRecord");
 	var records = require("./../config/ProfileProducts");
+	var product = require("./../config/getProductByName");
 
 	// index page
 	app.get("/", function(req, res, next) {
@@ -95,6 +96,26 @@ module.exports = function(app, passport) {
 			});
 	});
 
+	//Individual Product Page
+	app.get("/product/:name", function(req, res) {
+		listPromise = product.getProducts(req.user.id, req.params.name);
+		listPromise
+			.then(function(list) {
+				for (i in list) {
+					console.log(list[i]);
+				}
+				res.render("product", {
+					page: "Product",
+					menuId: "product",
+					user: req.user,
+					product: list
+				});
+			})
+			.catch(function(err) {
+				console.log(err);
+			});
+	});
+
 	app.get("/logout", function(req, res) {
 		req.logout();
 		res.redirect("/");
@@ -103,15 +124,6 @@ module.exports = function(app, passport) {
 	// faq page
 	app.get("/faq", function(req, res) {
 		res.render("faq", { page: "FAQ", menuId: "faq", user: req.user });
-	});
-
-	app.get("/list", function(req, res) {
-		res.render("list", {
-			page: "List",
-			menuId: "list",
-			user: req.user,
-			list: [1, 2, 3]
-		});
 	});
 };
 
