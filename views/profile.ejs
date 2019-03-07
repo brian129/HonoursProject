@@ -29,14 +29,25 @@
 							</tr>
 							<!--Loop to print out everything in the array-->
 							<% for(var i=0; i < results.length; i++) { %>
-								<tr class="table-hover">
+								<% if(results[i].SubItem == null) { %>
+								<tr class="table-hover">																
 									<td>
 										<a href="/product/<%=results[i].Name %>"><b><%= results[i].Name %></b></a>
 									</td>
 									<td>
-										<a href="/product/<%=results[i].Name %>"><%= results[i].SubItem %></a>
+										<a href="/product/<%=results[i].Name %>"></a>
 									</td>
 								</tr>
+							<% } else { %>
+								<tr class="table-hover">																
+										<td>
+											<a href="/product/<%=results[i].Name%>/<%= results[i].SubItem %>"><b><%= results[i].Name %></b></a>
+										</td>
+										<td>
+											<a href="/product/<%=results[i].Name%>/<%= results[i].SubItem %>"><%= results[i].SubItem %></a>
+										</td>
+									</tr>
+							<% } %>
 							<% } %>
 						</tbody>
 					</table>

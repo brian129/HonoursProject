@@ -1,10 +1,9 @@
 module.exports = function(app, passport) {
-	//var express = require("express");
-	//var router = express.Router();
 	var writeNew = require("../config/insertNewRecord");
 	var writeSub = require("../config/insertSubRecord");
 	var records = require("./../config/ProfileProducts");
-	var product = require("./../config/getProductByName");
+	var ParentProduct = require("../config/getParentByName");
+	var ChildProduct = require("./../config/getChildByName");
 
 	// index page
 	app.get("/", function(req, res, next) {
@@ -23,13 +22,23 @@ module.exports = function(app, passport) {
 	app.post("/record", function(req, res) {
 		console.log(req.body);
 		if (req.body.subVersion == "") {
-			writeNew.write(req).then(function() {
-				res.redirect("/profile");
-			});
+			writeNew
+				.write(req)
+				.then(function() {
+					res.redirect("/profile");
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
 		} else if (req.body.subVersion != "") {
-			writeSub.write(req).then(function() {
-				res.redirect("/profile");
-			});
+			writeSub
+				.write(req)
+				.then(function() {
+					res.redirect("/profile");
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
 		}
 	});
 
@@ -96,9 +105,32 @@ module.exports = function(app, passport) {
 			});
 	});
 
-	//Individual Product Page
+	//Individual Product Page - parent
 	app.get("/product/:name", function(req, res) {
-		listPromise = product.getProducts(req.user.id, req.params.name);
+		listPromise = ParentProduct.getProducts(req.user.id, req.params.name);
+		listPromise
+			.then(function(list) {
+				res.render("product", {
+					page: "Product",
+					menuId: "product",
+					user: req.user,
+					product: req.params.name,
+					subItem: null,
+					list: list
+				});
+			})
+			.catch(function(err) {
+				console.log(err);
+			});
+	});
+
+	//Individual Product Page - child
+	app.get("/product/:name/:subItem", function(req, res) {
+		listPromise = ChildProduct.getProducts(
+			req.user.id,
+			req.params.name,
+			req.params.subItem
+		);
 		listPromise
 			.then(function(list) {
 				for (i in list) {
@@ -108,7 +140,9 @@ module.exports = function(app, passport) {
 					page: "Product",
 					menuId: "product",
 					user: req.user,
-					product: list
+					product: req.params.name,
+					subItem: req.params.subItem,
+					list: list
 				});
 			})
 			.catch(function(err) {

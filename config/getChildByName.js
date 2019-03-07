@@ -1,7 +1,7 @@
 var pool = require("./database");
 var results = [];
 module.exports = {
-	getProducts: function(id, product) {
+	getProducts: function(id, parent, child) {
 		return new Promise(function(resolve, reject) {
 			var insertQuery = "CALL getProducts(?)";
 			var rowsPromise = pool.query(insertQuery, [id]);
@@ -29,9 +29,15 @@ module.exports = {
 
 					//filter results to ones containing the product name
 					var filteredResults = results.filter(function(result) {
-						return result.Name == product;
+						return result.Name == parent && result.SubItem == child;
 					});
 
+					//sort results by date
+					filteredResults.sort(function compare(a, b) {
+						var dateA = new Date(a.DateEnded);
+						var dateB = new Date(b.DateEnded);
+						return dateA - dateB;
+					});
 					resolve(filteredResults);
 				})
 				.catch(function(error) {
