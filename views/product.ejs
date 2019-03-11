@@ -6,194 +6,246 @@
 
 	<body>
 		<% include partials/menu %>
-		<div class="card mx-5">
-			<div
-				class="card-body d-flex flex-column justify-content-center  align-items-center"
-			>
-				<%if (subItem != null) { %>
-				<h1>
-					Price history: <%=product%>, subitem: <%=subItem%>
-				</h1>
-				<%} else {%>
-				<h1>
-					Price history: <%=product%>
-				</h1>
-				<%}%>
+		<section id="productDisplay" class="container">
+			<div class="card mx-auto">
 				<div
-					id="wrapper"
-					class="col-md-10"
-					style="position: relative; height: 60vh;width: content-box; padding-bottom:100px"
+					class="card-body d-flex flex-column justify-content-center  align-items-center"
 				>
-					<canvas id="myChart" aria-label="<%=product%>">
-						<p>Error</p>
-					</canvas>
-					<div id="colourLegend" class="col-6"></div>
+					<%if (subItem != null) { %>
+					<h1>
+						Price history: <%=product%>, subitem: <%=subItem%>
+					</h1>
+					<%} else {%>
+					<h1>
+						Price history: <%=product%>
+					</h1>
+					<%}%>
+					<div
+						id="wrapper"
+						class="chart-container"
+						style="height: 60vh; min-width:400px; width: 100%"
+					>
+						<canvas id="myChart" aria-label="<%=product%>">
+							<p>Error</p>
+						</canvas>
+						<div id="colourLegend" class="col-6"></div>
+					</div>
+					<div class="card border-primary h-100">
+						<div class="card-body d-flex flex-column align-items-start">
+							<ul style="list-style-type:square;">
+								<li style="color:rgba(0,192,0,1);font-size:30px">
+									<span style="color:black;font-size:17px">New</span>
+								</li>
+								<li style="color: rgba(0,32,255,1);font-size:30px">
+									<span style="color:black;font-size:17px"
+										>Used / Like New / Very Good / Good / Acceptable</span
+									>
+								</li>
+								<li style="color: rgba(160,128,96,1);font-size:30px">
+									<span style="color:black;font-size:17px">Refurbished</span>
+								</li>
+								<li style="color: rgba(255,0,0,1);font-size:30px">
+									<span style="color:black;font-size:17px">Faulty</span>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	</body>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-	<!--moment used for converting the date format to more compact and readable format-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-	<script type="text/javascript">
-		var list = <%-JSON.stringify(list)%>;
-		var size = Object.keys(list).length;
-		var format = [];
-		var date = [];
-		var time = [];
-		var sold = [];
-		var price = [];
-		var conditionName = [];
-		var comments = [];
-		var Name = [];
-		var subItem = [];
-		for (var g in list) {
-			if(list[g].BuyingFormat == "buyitnow"){
-				format.push("Buy It Now");
-			} else if(list[g].BuyingFormat == "auction"){
-				format.push("Auction");
-			}
-			date.push(moment(list[g].DateEnded).format("MMM Do YY"));
-			time.push(list[g].TimeEnded);
-			if(list[g].SoldStatus == 1){
-			sold.push("Sold");
-			}else{
-				sold.push("Unsold");
-			};
-			price.push(list[g].Price);
-			conditionName.push(list[g].ConditionName);
-			comments.push(list[g].Comments);
-			Name.push(list[g].Name);
-			subItem.push(list[g].SubItem);
-		}
-		//determine colour for each entry, from Ben Gardner https://stackoverflow.com/questions/35633618/chart-js-bar-chart-color-change-based-on-value
-		var colours = []
-		for(var i = 0; i < conditionName.length; i++){
-			var color;
-			switch(conditionName[i]){
-				case "New":
-				//green
-					color = "rgba(0,192,0,1)";
-					break;
-				case "Used":
-				//blue
-					color = "rgba(0,32,255,1)";
-					break;
-				case "Like New":
-				//blue
-					color = "rgba(0,32,255,1)";
-					break;
-				case "Very Good":
-				//blue
-					color = "rgba(0,32,255,1)";
-					break;
-				case "Good":
-				//blue
-					color = "rgba(0,32,255,1)";
-					break;
-				case "Acceptable":
-				//blue
-					color = "rgba(0,32,255,1)";
-					break;
-				case "Refurbished":
-				//brown
-					color = "rgba(160,128,96,1)";
-					break;
-				case "Faulty":
-				//red
-					color = "rgba(255,0,0,1)";
-					break;
-				default:
-					color = "yellow"
-			}
-			colours[i] = color;
-		}
-
-		//determine point shape for each entry
-		var style = []
-		for(var i = 0; i < sold.length; i++){
-			var temp;
-			switch(sold[i]){
-				case 1:
-				//sold
-					temp = "circle";
-					break;
-				case 0:
-				//blue
-					temp = "triangle";
-					break;
-			}
-			style[i] = temp;
-		}
-		var ctx = document.getElementById("myChart").getContext("2d");
-		var myChart = new Chart(ctx, {
-			type: "line",
-			data: {
-				labels: date,
-				datasets: [
-					{
-					label: "Price Recorded(£)",
-					fill: false,
-					data: price,
-					pointBackgroundColor: colours,
-					pointBorderColor: colours,
-					pointBorderWidth: 8,
-					pointStyle: style
-					}
-				]
-			},
-			options: {
-				legend:false,
-				legendCallback: function(chart) {
-					var ul = document.createElement('ul');
-						ul.innerHTML += `
-						<li style="color:rgba(0,192,0,1)">
-							<span>New</span></li>
-							<li style="color: rgba(0,32,255,1)">
-							<span>Used / Like New / Very Good / Good / Acceptable</span>
-							</li>
-							<li style="color: rgba(160,128,96,1)">
-							<span>Refurbished</span>
-							</li>
-							<li style="color: rgba(255,0,0,1)">
-							<span>Faulty</span>
-							</li>
-						`;
-		       	return ul.outerHTML;
-				},
-				layout:{
-					padding:{
-						top:25,
-						bottom:25
-					}
-				},
-				responsive: true,
-				maintainAspectRatio: false,
-				hover: {
-					mode: "index",
-					intersect: true
-				},
-				tooltips: {
-					enabled: true,
-					mode: "nearest",
-					displayColors: false,
-					//callback method referenced from Horken on https://stackoverflow.com/questions/40991270/custom-label-from-using-separate-array-in-chart-js
-					callbacks: {
-						label: function(tooltipItems, data) {
-							var timeTooltip = "Time: " + time[tooltipItems.index];
-							var formatTooltip = "Buying Format: " + format[tooltipItems.index];
-							var soldTooltip = "Sold Status: " + sold[tooltipItems.index];
-							var conditionTooltip = "Condition: " + conditionName[tooltipItems.index];
-							var commentTootip = "Comments: " + comments[tooltipItems.index];
-		      				var priceTooltip = "Price: £" + tooltipItems.yLabel;
-		      				var tooltip = [priceTooltip,timeTooltip,formatTooltip,soldTooltip,conditionTooltip,commentTootip]; //storing all the value here
-		      				return tooltip; //return Array back to function to show out
-						},
-					}
+	<script src="/javascripts/require.js" type="text/javascript"></script>
+	<script>
+			requirejs.config({
+				paths: {
+					jquery: "//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
+					moment: "//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment",
+					chartjs: "//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart"
 				}
-			}
-		});colourLegend.innerHTML = myChart.generateLegend();
+			});
+
+			define("moment-adapter", ["moment"], function(moment) {
+				// Set the global.
+				window.moment = moment;
+				return moment;
+			});
+
+			require(["jquery", "moment-adapter", "chartjs"], function(
+				$,
+				moment,
+				Chart
+			) {
+				var list = <%-JSON.stringify(list)%>;
+				var format = [];
+				var date = [];
+				var time = [];
+				var sold = [];
+				var price = [];
+				var conditionName = [];
+				var comments = [];
+				var Name = [];
+				var subItem = [];
+				for (var g in list) {
+					if(list[g].BuyingFormat == "buyitnow"){
+						format.push("Buy It Now");
+					} else if(list[g].BuyingFormat == "auction"){
+						format.push("Auction");
+					}
+					date.push(moment(list[g].DateEnded).format('ll'));
+					time.push(list[g].TimeEnded);
+					if(list[g].SoldStatus === 1){
+						sold.push("Sold");
+					}else{
+						sold.push("Unsold");
+					};
+					price.push(list[g].Price);
+					conditionName.push(list[g].ConditionName);
+					comments.push(list[g].Comments);
+					Name.push(list[g].Name);
+					subItem.push(list[g].SubItem);
+				}
+				//determine colour for each entry, from Ben Gardner https://stackoverflow.com/questions/35633618/chart-js-bar-chart-color-change-based-on-value
+				var colours = []
+				for(var i = 0; i < conditionName.length; i++){
+					var color;
+					switch(conditionName[i]){
+						case "New":
+						//green
+							color = "rgba(0,192,0,1)";
+							break;
+						case "Used":
+						//blue
+							color = "rgba(0,32,255,1)";
+							break;
+						case "Like New":
+						//blue
+							color = "rgba(0,32,255,1)";
+							break;
+						case "Very Good":
+						//blue
+							color = "rgba(0,32,255,1)";
+							break;
+						case "Good":
+						//blue
+							color = "rgba(0,32,255,1)";
+							break;
+						case "Acceptable":
+						//blue
+							color = "rgba(0,32,255,1)";
+							break;
+						case "Refurbished":
+						//brown
+							color = "rgba(160,128,96,1)";
+							break;
+						case "Faulty":
+						//red
+							color = "rgba(255,0,0,1)";
+							break;
+						default:
+							color = "yellow"
+					}
+					colours[i] = color;
+				}
+
+				//determine point shape for each entry
+				var style = []
+				for(var i = 0; i < sold.length; i++){
+					var temp;
+					switch(sold[i]){
+						case "Sold":
+						//sold
+							temp = "circle";
+							break;
+						case "Unsold":
+						//blue
+							temp = "crossRot";
+							break;
+					}
+					style[i] = temp;
+				}
+				var ctx = document.getElementById("myChart").getContext("2d");
+				var myChart = new Chart(ctx, {
+					type: "line",
+					data: {
+						labels: date,
+						datasets: [
+							{
+							label: "Price Recorded(£)",
+							fill: false,
+							data: price,
+							pointSize: 100,
+							pointBackgroundColor: colours,
+							pointBorderColor: colours,
+							pointRadius: 10,
+							pointHoverRadius: 15,
+							pointStyle: style
+							}
+						]
+					},
+					options: {
+						scales: {
+							xAxes: [
+								{
+									type: "time",
+									time:{
+										unit: 'month'
+									},
+									distribution: "linear",
+									bounds: 'data',
+									ticks:{
+										source: 'data',
+										minRotation: 30,
+									},
+									scaleLabel: {
+										display: true,
+										labelString: 'Date'
+									},
+								}
+							]
+						},
+
+						legend: {
+							display: true,
+						},
+						layout:{
+							padding:{
+								top:25,
+								bottom:25
+							}
+						},
+						responsive: true,
+						maintainAspectRatio: false,
+						hover: {
+							mode: "index",
+							intersect: true
+						},
+						tooltips: {
+							enabled: true,
+							mode: "nearest",
+							displayColors: false,
+							//callback method referenced from Horken on https://stackoverflow.com/questions/40991270/custom-label-from-using-separate-array-in-chart-js
+							callbacks: {
+								label: function(tooltipItems, data) {
+									var timeTooltip = "Time: " + time[tooltipItems.index];
+									var formatTooltip = "Buying Format: " + format[tooltipItems.index];
+									var conditionTooltip = "Condition: " + conditionName[tooltipItems.index];
+									var commentTootip = "Comments: " + comments[tooltipItems.index];
+									var priceTooltip = "Price: £" + tooltipItems.yLabel;
+									  if(sold[tooltipItems.index] === "Unsold"){
+										var tooltip = ["UNSOLD", priceTooltip,timeTooltip,formatTooltip,conditionTooltip,commentTootip]; //storing all the value here
+										return tooltip; //return Array back to function to show out
+									}else{
+										var tooltip = [priceTooltip,timeTooltip,formatTooltip,conditionTooltip,commentTootip]; //storing all the value here
+										return tooltip;
+									}
+								}
+							}
+							}
+						}
+					}
+				);
+
+		});
 	</script>
 	<% include partials/script %>
 </html>

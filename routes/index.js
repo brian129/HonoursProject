@@ -4,6 +4,7 @@ module.exports = function(app, passport) {
 	var records = require("./../config/ProfileProducts");
 	var ParentProduct = require("../config/getParentByName");
 	var ChildProduct = require("./../config/getChildByName");
+	var getNames = require("./../config/getProductNames");
 
 	// index page
 	app.get("/", function(req, res, next) {
@@ -12,11 +13,21 @@ module.exports = function(app, passport) {
 
 	//record page
 	app.get("/record", function(req, res, next) {
-		res.render("record", {
-			page: "Add Record",
-			menuId: "record",
-			user: req.user
-		});
+		listPromise = getNames.getProducts(req.user.id);
+		listPromise
+			.then(function(list) {
+				console.log(list);
+				res.render("record", {
+					page: "Add Record",
+					menuId: "record",
+					user: req.user,
+					itemName: list.par,
+					subItem: list.child
+				});
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
 	});
 
 	app.post("/record", function(req, res) {
@@ -159,10 +170,9 @@ module.exports = function(app, passport) {
 	app.get("/faq", function(req, res) {
 		res.render("faq", { page: "FAQ", menuId: "faq", user: req.user });
 	});
+
+	function isLoggedIn(req, res, next) {
+		if (req.isAuthenticated()) return next();
+		res.redirect("/");
+	}
 };
-
-function isLoggedIn(req, res, next) {
-	if (req.isAuthenticated()) return next();
-
-	res.redirect("/");
-}

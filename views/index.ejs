@@ -6,57 +6,59 @@
 
 	<body>
 		<% include partials/menu %>
-		<div class="view">
-			<br />
-			<div class="jumbotron w-50 py-5 mx-auto">
-				<div
-					class="card-body d-flex flex-column justify-content-center align-items-center"
-				>
-					<p>
-						*name* is a web app designed to help you track the selling prices of
-						the product you want on eBay.
-					</p>
-					<p>
-						Giving you to best advantage to get the <b>right thing</b>, at the
-						<b>right price</b>.
-					</p>
-					<% if (typeof user !='undefined'){ %>
-					<p>
-						Visit your Profile to see your existing records or add a record of a
-						new item below.
-					</p>
-					<button
-						class="btn btn-dark mt-auto"
-						type="submit"
-						alt="Profile"
-						onClick="location.href='profile'"
+		<section id="productDisplay" class="container">
+			<div class="view">
+				<br />
+				<div class="jumbotron py-5 mx-auto">
+					<div
+						class="card-body d-flex flex-column justify-content-center align-items-center"
 					>
-						Profile
-					</button>
-					<hr />
-					<button
-						class="btn btn-dark mt-auto"
-						type="submit"
-						alt="New Record"
-						onClick="location.href='record'"
-					>
-						Add Item
-					</button>
-					<% } else { %>
-					<p>Simply create an account or login to start.</p>
-					<button
-						class="btn btn-dark mt-auto"
-						type="submit"
-						alt="login"
-						onClick="location.href='login'"
-					>
-						Login or Register
-					</button>
-					<% } %>
+						<p>
+							*name* is an eBay price tracker to help you track the selling
+							prices of the product you want on eBay.
+						</p>
+						<p>
+							Giving you to best advantage to get the <b>right product</b>, at
+							the <b>right price</b>.
+						</p>
+						<% if (typeof user !='undefined'){ %>
+						<p>
+							Visit your Profile to see your existing records or add a record of
+							a new item below.
+						</p>
+						<button
+							class="btn btn-dark mt-auto"
+							type="submit"
+							alt="Profile"
+							onClick="location.href='profile'"
+						>
+							Profile
+						</button>
+						<hr />
+						<button
+							class="btn btn-dark mt-auto"
+							type="submit"
+							alt="New Record"
+							onClick="location.href='record'"
+						>
+							Add Item
+						</button>
+						<% } else { %>
+						<p>Create an account or login to start.</p>
+						<button
+							class="btn btn-dark mt-auto"
+							type="submit"
+							alt="login"
+							onClick="location.href='login'"
+						>
+							Login or Register
+						</button>
+						<% } %>
+					</div>
 				</div>
+				<br />
 			</div>
-			<br />
-		</div>
+		</section>
 	</body>
 	<% include partials/script %>
 </html>

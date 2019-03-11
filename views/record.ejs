@@ -15,7 +15,23 @@
 						<label for="name" class="col-xs col-form-label float-left ml-2"
 							>Product Name</label
 						>
-						<div class="col-12">
+						<div class="input-group-prepend col-12">
+							<button
+								class="btn btn-outline-secondary dropdown-toggle"
+								type="button"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
+								Existing Records
+							</button>
+							<div class="dropdown-menu">
+								<%for (var i in itemName) { %>
+								<a class="dropdown-item" value="<%=itemName[i]%>"
+									><%=itemName[i]%></a
+								>
+								<% } %>
+							</div>
 							<input
 								id="name"
 								name="name"
