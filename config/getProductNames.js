@@ -27,7 +27,8 @@ module.exports = {
 					child.sort();
 					par = [...new Set(par)];
 					child = [...new Set(child)];
-					resolve(["Parent" + [par], "Child" + [child]]);
+
+					resolve([par] + "split" + [child]);
 				})
 				.catch(function(error) {
 					reject(error);

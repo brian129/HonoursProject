@@ -7,22 +7,30 @@ module.exports = function(app, passport) {
 	var getNames = require("./../config/getProductNames");
 
 	// index page
-	app.get("/", function(req, res, next) {
+	app.get("/", function(req, res) {
 		res.render("index", { page: "Home", menuId: "home", user: req.user });
 	});
 
 	//record page
-	app.get("/record", function(req, res, next) {
+	app.get("/record", function(req, res) {
 		listPromise = getNames.getProducts(req.user.id);
 		listPromise
 			.then(function(list) {
+				console.log(typeof list);
+				list = list.split("split");
 				console.log(list);
+				var parent = list[0];
+				var child = list[1];
+
+				parentArray = parent.split(",");
+				childArray = child.split(",");
+
 				res.render("record", {
 					page: "Add Record",
 					menuId: "record",
 					user: req.user,
-					itemName: list.par,
-					subItem: list.child
+					itemName: parentArray,
+					subItem: childArray
 				});
 			})
 			.catch(function(error) {
@@ -32,7 +40,7 @@ module.exports = function(app, passport) {
 
 	app.post("/record", function(req, res) {
 		console.log(req.body);
-		if (req.body.subVersion == "") {
+		if (req.body.subItem == "") {
 			writeNew
 				.write(req)
 				.then(function() {
@@ -41,7 +49,7 @@ module.exports = function(app, passport) {
 				.catch(function(error) {
 					console.log(error);
 				});
-		} else if (req.body.subVersion != "") {
+		} else if (req.body.subItem != "") {
 			writeSub
 				.write(req)
 				.then(function() {
@@ -54,7 +62,7 @@ module.exports = function(app, passport) {
 	});
 
 	// login page
-	app.get("/login", function(req, res, next) {
+	app.get("/login", function(req, res) {
 		res.render("login", {
 			page: "Login",
 			menuId: "login",
@@ -66,7 +74,7 @@ module.exports = function(app, passport) {
 	app.post(
 		"/login",
 		passport.authenticate("local-login", {
-			successRedirect: "/profile",
+			successRedirect: "/",
 			failureRedirect: "/login",
 			failureFlash: true
 		}),

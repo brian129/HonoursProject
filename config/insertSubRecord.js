@@ -5,7 +5,7 @@ module.exports = {
 			var insertQuery = "CALL insertSubItem(?,?,?,?,?,?,?,?,?,?)";
 			var rowsPromise = pool.query(insertQuery, [
 				req.body.name,
-				req.body.subVersion,
+				req.body.subItem,
 				req.body.buyingFormat,
 				req.body.dateEnded,
 				req.body.time,

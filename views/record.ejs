@@ -8,212 +8,225 @@
 		<% include partials/menu %>
 		<section id="forms" class="container card mx-auto my-2">
 			<div class="card-body d-flex flex-column align-items-right">
-				<h1>Add New Item</h1>
+				<h1>Add New Price Record</h1>
 				<form role="form" action="/record" method="POST">
 					<!--Product Name Element-->
 					<div class="form-group row">
-						<label for="name" class="col-xs col-form-label float-left ml-2"
-							>Product Name</label
+						<label for="name" class="col-xs col-form-label float-left"
+							><b>Product Name</b></label
 						>
 						<div class="input-group-prepend col-12">
-							<button
-								class="btn btn-outline-secondary dropdown-toggle"
-								type="button"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false"
-							>
-								Existing Records
-							</button>
-							<div class="dropdown-menu">
-								<%for (var i in itemName) { %>
-								<a class="dropdown-item" value="<%=itemName[i]%>"
-									><%=itemName[i]%></a
-								>
-								<% } %>
+							<div class="col-4">
+								<select
+									id="nameDropdown"
+									name="itemName"
+									class="custom-select form-control"
+									onchange="nameSelectionChange();"
+									><option selected="true" disabled="disabled"
+										>Select Existing Product</option
+									>
+									<%for (var i in itemName) { %>
+									<option value="<%=itemName[i]%>"
+										><b><%=itemName[i]%></b></option
+									>
+									<% } %>
+								</select>
 							</div>
-							<input
-								id="name"
-								name="name"
-								type="text"
-								class="form-control"
-								required
-							/>
+							<div class="col-8">
+								<input
+									id="name"
+									name="name"
+									type="text"
+									class="form-control"
+									placeholder="...Or Enter a New Item"
+									required
+								/>
+							</div>
 						</div>
 					</div>
 					<!--Add sub item textbox here-->
 					<div class="form-group row">
 						<label
-							for="subVersion"
-							class="col-xs col-form-label float-left text-muted ml-2"
-							>Sub Item/Version (optional)</label
+							for="subItem"
+							class="col-xs col-form-label float-left text-muted"
+							><b>Sub Item/Version (optional)</b></label
 						>
-						<div class="col-12">
-							<input
-								id="subVersion"
-								name="subVersion"
-								type="text"
-								class="form-control"
-							/>
+						<div class="input-group-prepend col-lg-12">
+							<div class="col-4">
+								<select
+									id="subItemDropdown"
+									name="subItem"
+									class="custom-select form-control"
+									onchange="subItemSelectionChange();"
+									><option selected="true" disabled="disabled"
+										>Select Existing Subitems</option
+									>
+									<%for (var i in subItem) { %>
+									<option value="<%=subItem[i]%>"
+										><b><%=subItem[i]%></b></option
+									>
+									<% } %>
+								</select>
+							</div>
+							<div class="col-8">
+								<input
+									id="subItem"
+									name="subItem"
+									type="text"
+									class="form-control"
+									placeholder="...Or Enter a New Subitem"
+								/>
+							</div>
 						</div>
 						<span
 							class="help-block float-left text-muted ml-2"
-							id="hint_subVersion"
+							id="hint_subItem"
 						>
 							Specific version of an item
 						</span>
 					</div>
 					<hr />
-					<!--Buying Format Radio Button-->
+					<!--Buying Format/ Sold unsold Radio Button-->
 					<div class="form-group row">
-						<label class="col-xs col-form-label float-left ml-2"
-							>Buying Format</label
-						>
-						<div class="col-12">
-							<div class="custom-control custom-radio custom-control-inline">
-								<input
-									name="buyingFormat"
-									id="buyingFormat_0"
-									type="radio"
-									class="custom-control-input form-control"
-									value="auction"
-									checked="checked"
-								/>
-								<label for="buyingFormat_0" class="custom-control-label"
-									>Auction</label
-								>
+						<div class="col-6" style="border-right:solid 1px #616161;">
+							<label class="col-xs col-form-label"><b>Buying Format</b></label>
+							<div class="col-12">
+								<div class="custom-control custom-radio custom-control-inline">
+									<input
+										name="buyingFormat"
+										id="buyingFormat_0"
+										type="radio"
+										class="custom-control-input form-control"
+										value="auction"
+										checked="checked"
+									/>
+									<label for="buyingFormat_0" class="custom-control-label"
+										>Auction</label
+									>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input
+										name="buyingFormat"
+										id="buyingFormat_1"
+										type="radio"
+										class="custom-control-input form-control"
+										value="buyItNow"
+									/>
+									<label for="buyingFormat_1" class="custom-control-label"
+										>Buy It Now</label
+									>
+								</div>
 							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input
-									name="buyingFormat"
-									id="buyingFormat_1"
-									type="radio"
-									class="custom-control-input form-control"
-									value="buyItNow"
-								/>
-								<label for="buyingFormat_1" class="custom-control-label"
-									>Buy It Now</label
+						</div>
+						<div class="col-6">
+							<label class="col-xs col-form-label"><b>Sold/Unsold</b></label>
+							<div class="col-12">
+								<div
+									class="custom-control custom-radio custom-control-inline"
+									required
 								>
+									<input
+										name="soldStatus"
+										id="soldStatus_0"
+										type="radio"
+										class="custom-control-input form-control"
+										value="1"
+										checked="checked"
+									/>
+									<label for="soldStatus_0" class="custom-control-label"
+										>Sold</label
+									>
+								</div>
+								<div class="custom-control custom-radio custom-control-inline">
+									<input
+										name="soldStatus"
+										id="soldStatus_1"
+										type="radio"
+										class="custom-control-input form-control"
+										value="0"
+									/>
+									<label for="soldStatus_1" class="custom-control-label"
+										>Unsold</label
+									>
+								</div>
 							</div>
 						</div>
 					</div>
 					<hr />
 					<!--Date Ended Datepicker-->
 					<div class="form-group row mx-auto">
-						<label class="col-xs col-form-label float-left ml-2"
-							>Date Ended</label
-						>
-						<input
-							class="col-12 datepicker form-control"
-							type="date"
-							name="dateEnded"
-							value="2019-01-01"
-						/>
-					</div>
-					<hr />
-					<!--Time picker-->
-					<div class="form-group row mx-auto">
-						<label class="col-xs col-form-label float-left ml-2"
-							>Time Ended</label
-						>
-						<input
-							class="col-12 datepicker form-control"
-							type="time"
-							name="time"
-							value="12:00:00"
-						/>
-					</div>
-					<hr />
-					<!--Sold/Unsold Radio Button-->
-					<div class="form-group row">
-						<label class="col-xs col-form-label float-left ml-2"
-							>Sold/Unsold</label
-						>
-						<div class="col-12">
-							<div
-								class="custom-control custom-radio custom-control-inline"
-								required
+						<div class="col-6">
+							<label class="col-xs col-form-label float-left"
+								><b>Date Ended</b></label
 							>
-								<input
-									name="soldStatus"
-									id="soldStatus_0"
-									type="radio"
-									class="custom-control-input form-control"
-									value="1"
-									checked="checked"
-								/>
-								<label for="soldStatus_0" class="custom-control-label"
-									>Sold</label
-								>
-							</div>
-							<div class="custom-control custom-radio custom-control-inline">
-								<input
-									name="soldStatus"
-									id="soldStatus_1"
-									type="radio"
-									class="custom-control-input form-control"
-									value="0"
-								/>
-								<label for="soldStatus_1" class="custom-control-label"
-									>Unsold</label
-								>
-							</div>
+							<input
+								class="col-12 datepicker form-control"
+								type="date"
+								name="dateEnded"
+								value="2019-01-01"
+							/>
 						</div>
-					</div>
-					<hr />
-					<!--Ending Price Element-->
-					<div class="form-group row">
-						<label
-							for="endingPrice"
-							class="col-xs col-form-label float-left ml-2"
-							>Item Ending Price</label
-						>
-						<div class="col-12">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="">£</span>
 
-								<input
-									id="endingPrice"
-									name="endingPrice"
-									type="number"
-									step="any"
-									class="form-control"
-									required
-								/>
-							</div>
+						<!--Time picker-->
+						<div class="col-6">
+							<label class="col-xs col-form-label"><b>Time Ended</b></label>
+							<input
+								class="col-12 datepicker form-control"
+								type="time"
+								name="time"
+								value="12:00:00"
+							/>
 						</div>
 					</div>
 					<hr />
-					<!--Condition Dropdown-->
+					<!--Ending Price Element and condition dropdown-->
 					<div class="form-group row">
-						<label for="condition" class="col-xs col-form-label float-left ml-2"
-							>Condition</label
-						>
-						<div class="col-12">
-							<select
-								id="condition"
-								name="condition"
-								class="custom-select form-control"
-								style="height:35px"
+						<div class="col-6">
+							<label for="endingPrice" class="col-xs col-form-label"
+								><b>Item Ending Price</b></label
 							>
-								<option value="1"><b>New</b></option>
-								<option value="2"><b>Used</b></option>
-								<option value="3"><b>&#160;&#160;Like New</b></option>
-								<option value="4"><b>&#160;&#160;Very Good</b></option>
-								<option value="5"><b>&#160;&#160;Good</b></option>
-								<option value="6"><b>&#160;&#160;Acceptable</b></option>
-								<option value="7"><b>Refurbished</b></option>
-								<option value="8"><b>Faulty</b></option>
-							</select>
+							<div class="col-12">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="">£</span>
+									<input
+										id="endingPrice"
+										name="endingPrice"
+										type="number"
+										step="any"
+										class="form-control"
+										required
+									/>
+								</div>
+							</div>
+						</div>
+						<div class="col-6">
+							<label for="condition" class="col-xs col-form-label"
+								><b>Condition</b></label
+							>
+							<div class="col-12">
+								<select
+									id="condition"
+									name="condition"
+									class="custom-select form-control"
+									style="height:35px"
+								>
+									<option value="1"><b>New</b></option>
+									<option value="2"><b>Used</b></option>
+									<option value="3"><b>&#160;&#160;Like New</b></option>
+									<option value="4"><b>&#160;&#160;Very Good</b></option>
+									<option value="5"><b>&#160;&#160;Good</b></option>
+									<option value="6"><b>&#160;&#160;Acceptable</b></option>
+									<option value="7"><b>Refurbished</b></option>
+									<option value="8"><b>Faulty</b></option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<hr />
 					<!--Addition Comments Element-->
 					<div class="form-group row">
-						<label
-							for="endingPrice"
-							class="col-xs col-form-label float-left ml-2"
-							>Additional Comments</label
+						<label for="endingPrice" class="col-xs col-form-label"
+							><b>Additional Comments</b></label
 						>
 						<div class="col-12">
 							<input
@@ -223,13 +236,13 @@
 								class="form-control"
 							/>
 						</div>
-						<span class="help-block float-left text-muted" id="hint_comments">
+						<span class="help-block text-muted" id="hint_comments">
 							e.g. Boxed/Unboxed, missing parts
 						</span>
 					</div>
 					<hr />
 					<!--Submit Button-->
-					<div class="form-group row">
+					<div class="form-group row align-content-center">
 						<div class="col-12">
 							<button name="submit" type="submit" class="btn btn-primary mr-2">
 								Submit
@@ -243,6 +256,20 @@
 	<script>
 		var today = new Date().toISOString().split("T")[0];
 		document.getElementsByName("dateEnded")[0].setAttribute("max", today);
+
+		function nameSelectionChange() {
+			var e = document.getElementById("nameDropdown");
+			var str = e.options[e.selectedIndex].value;
+
+			document.getElementById("name").value = str;
+		}
+
+		function subItemSelectionChange() {
+			var e = document.getElementById("subItemDropdown");
+			var str = e.options[e.selectedIndex].value;
+
+			document.getElementById("subItem").value = str;
+		}
 	</script>
 	<% include partials/script %>
 </html>
