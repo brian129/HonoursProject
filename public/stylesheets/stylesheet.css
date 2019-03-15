@@ -146,7 +146,7 @@ sup {
 
 a {
   color: #083358;
-  text-decoration: none;
+  text-decoration: #0054a4;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
   a:hover {
@@ -5729,4 +5729,26 @@ a.text-dark:hover, a.text-dark:focus {
       margin: 0 5px 8px 0;
       vertical-align: -9.4px;
    }
+
+   /*profile page search box*/
+   input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  /* When the input field gets focus, change its width to 100% */
+  input[type=text]:focus {
+    width: 100%;
+  }
+
+  .toplogo {
+    margin-top: 5px;
+}
+
+  .toplogo img{
+
+    height : 5%;
+    width : 5%;
+}
 }

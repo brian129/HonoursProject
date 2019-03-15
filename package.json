@@ -1,9 +1,10 @@
 {
 	"name": "honoursproject",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"start": "node ./bin/www"
+		"start": "node ./bin/www",
+		"test": "mocha"
 	},
 	"dependencies": {
 		"bcrypt-nodejs": "0.0.3",
@@ -15,11 +16,35 @@
 		"ejs": "~2.5.7",
 		"express": "~4.16.0",
 		"express-session": "^1.15.6",
+		"fuse.js": "^3.4.4",
 		"http-errors": "~1.6.2",
 		"moment": "^2.24.0",
 		"morgan": "~1.9.0",
 		"mysql": "^2.16.0",
 		"passport": "^0.4.0",
 		"passport-local": "^1.0.0"
-	}
+	},
+	"description": "A web app that stores previous item ending price entered by the user, displays the results using a interactive graph",
+	"main": "app.js",
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"mocha": "^6.0.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/brian129/HonoursProject.git"
+	},
+	"author": "Brian Hung",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/brian129/HonoursProject/issues"
+	},
+	"homepage": "https://github.com/brian129/HonoursProject#readme",
+	"keywords": [
+		"eBay",
+		"price",
+		"history",
+		"assistant",
+		"tracker"
+	]
 }

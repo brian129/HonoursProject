@@ -12,7 +12,7 @@
 				<form role="form" action="/record" method="POST">
 					<!--Product Name Element-->
 					<div class="form-group row">
-						<label for="name" class="col-xs col-form-label float-left"
+						<label for="name" class="col-xs col-form-label"
 							><b>Product Name</b></label
 						>
 						<div class="input-group-prepend col-12">
@@ -20,7 +20,7 @@
 								<select
 									id="nameDropdown"
 									name="itemName"
-									class="custom-select form-control"
+									class="custom-select"
 									onchange="nameSelectionChange();"
 									><option selected="true" disabled="disabled"
 										>Select Existing Product</option
@@ -46,17 +46,15 @@
 					</div>
 					<!--Add sub item textbox here-->
 					<div class="form-group row">
-						<label
-							for="subItem"
-							class="col-xs col-form-label float-left text-muted"
+						<label for="subItem" class="col-xs col-form-label text-muted"
 							><b>Sub Item/Version (optional)</b></label
 						>
-						<div class="input-group-prepend col-lg-12">
+						<div class="input-group-prepend col-12">
 							<div class="col-4">
 								<select
 									id="subItemDropdown"
-									name="subItem"
-									class="custom-select form-control"
+									name="subitem"
+									class="custom-select"
 									onchange="subItemSelectionChange();"
 									><option selected="true" disabled="disabled"
 										>Select Existing Subitems</option
@@ -187,8 +185,8 @@
 							>
 							<div class="col-12">
 								<div class="input-group-prepend">
-									<span class="input-group-text" id="">£</span>
-									<input
+									<span class="input-group-text" id="">£</span
+									><input
 										id="endingPrice"
 										name="endingPrice"
 										type="number"
@@ -208,7 +206,6 @@
 									id="condition"
 									name="condition"
 									class="custom-select form-control"
-									style="height:35px"
 								>
 									<option value="1"><b>New</b></option>
 									<option value="2"><b>Used</b></option>
@@ -242,9 +239,9 @@
 					</div>
 					<hr />
 					<!--Submit Button-->
-					<div class="form-group row align-content-center">
+					<div class="form-group row">
 						<div class="col-12">
-							<button name="submit" type="submit" class="btn btn-primary mr-2">
+							<button name="submit" type="submit" class="btn btn-primary">
 								Submit
 							</button>
 						</div>

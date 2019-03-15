@@ -6,7 +6,7 @@
 
 	<body>
 		<% include partials/menu %>
-		<section id="productDisplay" class="container">
+		<section id="productDisplay" class="container mx-auto my-2">
 			<div class="view">
 				<br />
 				<div class="jumbotron py-5 mx-auto">
@@ -14,8 +14,7 @@
 						class="card-body d-flex flex-column justify-content-center align-items-center"
 					>
 						<p>
-							*name* is an eBay price tracker to help you track the selling
-							prices of the product you want on eBay.
+							eBay Price Archive is an place to store the ending price of the items you have been watching on eBay.
 						</p>
 						<p>
 							Giving you to best advantage to get the <b>right product</b>, at
@@ -41,7 +40,7 @@
 							alt="New Record"
 							onClick="location.href='record'"
 						>
-							Add Item
+							Add Record
 						</button>
 						<% } else { %>
 						<p>Create an account or login to start.</p>

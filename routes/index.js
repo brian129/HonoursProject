@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
 	var ParentProduct = require("../config/getParentByName");
 	var ChildProduct = require("./../config/getChildByName");
 	var getNames = require("./../config/getProductNames");
-
+	var search = require("../config/filterFunctions");
 	// index page
 	app.get("/", function(req, res) {
 		res.render("index", { page: "Home", menuId: "home", user: req.user });
@@ -13,6 +13,9 @@ module.exports = function(app, passport) {
 
 	//record page
 	app.get("/record", function(req, res) {
+		if (req.user === undefined) {
+			res.redirect("/");
+		}
 		listPromise = getNames.getProducts(req.user.id);
 		listPromise
 			.then(function(list) {
@@ -109,6 +112,9 @@ module.exports = function(app, passport) {
 
 	// profile page
 	app.get("/profile", isLoggedIn, function(req, res) {
+		if (req.user === undefined) {
+			res.redirect("/");
+		}
 		listPromise = records.getProducts(req.user.id);
 		listPromise
 			.then(function(list) {
@@ -124,8 +130,45 @@ module.exports = function(app, passport) {
 			});
 	});
 
+	app.post("/profile", function(req, res) {
+		if (req.body.action == "product") {
+			listPromise = search.getProducts(req.user.id, req.body.search);
+			listPromise
+				.then(function(list) {
+					res.render("profile", {
+						page: "Profile",
+						menuId: "profile",
+						user: req.user,
+						results: list
+					});
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		} else if (req.body.action == "productAndComment") {
+			listPromise = search.getProductAndComment(req.user.id, req.body.search);
+			listPromise
+				.then(function(list) {
+					res.render("profile", {
+						page: "Profile",
+						menuId: "profile",
+						user: req.user,
+						results: list
+					});
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
+		} else {
+			res.redirect("/profile");
+		}
+	});
+
 	//Individual Product Page - parent
 	app.get("/product/:name", function(req, res) {
+		if (req.user === undefined) {
+			res.redirect("/");
+		}
 		listPromise = ParentProduct.getProducts(req.user.id, req.params.name);
 		listPromise
 			.then(function(list) {
@@ -145,6 +188,9 @@ module.exports = function(app, passport) {
 
 	//Individual Product Page - child
 	app.get("/product/:name/:subItem", function(req, res) {
+		if (req.user === undefined) {
+			res.redirect("/");
+		}
 		listPromise = ChildProduct.getProducts(
 			req.user.id,
 			req.params.name,
