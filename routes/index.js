@@ -118,6 +118,7 @@ module.exports = function(app, passport) {
 		listPromise = records.getProducts(req.user.id);
 		listPromise
 			.then(function(list) {
+				console.log(list);
 				res.render("profile", {
 					page: "Profile",
 					menuId: "profile",
