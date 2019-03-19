@@ -15,6 +15,18 @@ module.exports = {
 							results[i].SubItem = "";
 						}
 					}
+					//sort in alphabetical order
+					results.sort(function(a, b) {
+						var x = a.Name.toLowerCase();
+						var y = b.Name.toLowerCase();
+						if (x < y) {
+							return -1;
+						}
+						if (x > y) {
+							return 1;
+						}
+						return 0;
+					});
 					//algorithm from Eydrian on https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript to remove duplicates
 					results = results.filter(
 						(results, index, self) =>
@@ -49,6 +61,18 @@ module.exports = {
 							results[i].SubItem = "";
 						}
 					}
+					//sort in alphabetical order
+					results.sort(function(a, b) {
+						var x = a.Name.toLowerCase();
+						var y = b.Name.toLowerCase();
+						if (x < y) {
+							return -1;
+						}
+						if (x > y) {
+							return 1;
+						}
+						return 0;
+					});
 
 					//algorithm from Eydrian on https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript to remove duplicates
 					results = results.filter(

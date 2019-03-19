@@ -14,7 +14,7 @@
 				<div class="card border-primary h-50 mx-auto">
 					<div class="card-body">
 						<h2><%=user.username%>'s Profile</h2>
-				<a href="/logout" class="btn btn-danger btn-sm">Logout</a>
+				<a href="/logout" class="btn btn-danger btn-sm d-block">Logout</a>
 				</div>
 				</div>
 				
@@ -27,10 +27,10 @@
 						<div class="form-group row">
 							<input type="text" name="search" class="form-control mx-2" placeholder="Search here...">
 						</div>
-						<div class="btn-group d-flex justify-content-center" role="group" aria-label="items filter options">
-							<button class="btn btn-outline-dark rounded-right mx-2" type="submit" name="action" value="product">Search for Product/SubItem</button>
-							<button class="btn btn-outline-dark rounded-right mx-2" type="submit" name="action" value="productAndComment">Search for Product/SubItem and Comment</button>
-							<button class="btn btn-light rounded-right mx-2" type="submit" name="action" value="showAll">Display All Records</button>
+						<div class="btn-group d-flex justify-content-center flex-wrap" role="group" aria-label="items filter options">
+							<button class="btn btn-outline-dark rounded mx-2" type="submit" name="action" value="product">Search for Product/SubItem</button>
+							<button class="btn btn-outline-dark rounded mx-2" type="submit" name="action" value="productAndComment">Search for Product/SubItem and Comment</button>
+							<button class="btn btn-light rounded mx-2" type="submit" name="action" value="showAll">Display All Records</button>
 						</div>
 					</form>
 				</div>

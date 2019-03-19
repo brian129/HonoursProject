@@ -2288,7 +2288,7 @@ input[type="button"].btn-block {
     .navbar-expand-sm > .container-fluid {
       flex-wrap: nowrap; }
     .navbar-expand-sm .navbar-collapse {
-      display: flex !important;
+      display: flex;
       flex-basis: auto; }
     .navbar-expand-sm .navbar-toggler {
       display: none; } }
@@ -2314,7 +2314,7 @@ input[type="button"].btn-block {
     .navbar-expand-md > .container-fluid {
       flex-wrap: nowrap; }
     .navbar-expand-md .navbar-collapse {
-      display: flex !important;
+      display: flex;
       flex-basis: auto; }
     .navbar-expand-md .navbar-toggler {
       display: none; } }
@@ -2340,7 +2340,7 @@ input[type="button"].btn-block {
     .navbar-expand-lg > .container-fluid {
       flex-wrap: nowrap; }
     .navbar-expand-lg .navbar-collapse {
-      display: flex !important;
+      display: flex;
       flex-basis: auto; }
     .navbar-expand-lg .navbar-toggler {
       display: none; } }
@@ -2366,7 +2366,7 @@ input[type="button"].btn-block {
     .navbar-expand-xl > .container-fluid {
       flex-wrap: nowrap; }
     .navbar-expand-xl .navbar-collapse {
-      display: flex !important;
+      display: flex;
       flex-basis: auto; }
     .navbar-expand-xl .navbar-toggler {
       display: none; } }
@@ -2389,7 +2389,7 @@ input[type="button"].btn-block {
   .navbar-expand > .container-fluid {
     flex-wrap: nowrap; }
   .navbar-expand .navbar-collapse {
-    display: flex !important;
+    display: flex;
     flex-basis: auto; }
   .navbar-expand .navbar-toggler {
     display: none; }
