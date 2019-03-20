@@ -193,7 +193,8 @@
 							pointBorderColor: colours,
 							pointRadius: 10,
 							pointHoverRadius: 15,
-							pointStyle: style
+							pointStyle: style,
+							linetension: 1
 							}
 						]
 					},
@@ -203,13 +204,17 @@
 								{
 									type: "time",
 									time:{
-										unit: 'month'
+										unit: 'week',
+										displayFormats: {
+                                        week: 'DD MMM'
+                                    }
+
 									},
 									distribution: "linear",
 									bounds: 'data',
 									ticks:{
 										source: 'data',
-										minRotation: 30,
+										minRotation: 45,
 									},
 									scaleLabel: {
 										display: true,
