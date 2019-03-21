@@ -19,9 +19,7 @@ module.exports = function(app, passport) {
 		listPromise = getNames.getProducts(req.user.id);
 		listPromise
 			.then(function(list) {
-				console.log(typeof list);
 				list = list.split("split");
-				console.log(list);
 				var parent = list[0];
 				var child = list[1];
 
@@ -198,9 +196,6 @@ module.exports = function(app, passport) {
 		);
 		listPromise
 			.then(function(list) {
-				for (i in list) {
-					console.log(list[i]);
-				}
 				res.render("product", {
 					page: "Product",
 					menuId: "product",
