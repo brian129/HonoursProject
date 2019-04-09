@@ -8,6 +8,8 @@
 		<% include partials/menu %>
 		<section id="productDisplay" class="container mx-auto my-2">
 			<div class="card mx-auto">
+			<div class="p-2">
+			<input class="btn btn-outline-dark" type="button" value="&larr;	Back" onclick="history.back(-1)" /></div>
 				<div
 					class="card-body d-flex flex-column justify-content-center  align-items-center"
 				>
@@ -119,6 +121,7 @@
 					Name.push(list[g].Name);
 					subItem.push(list[g].SubItem);
 				}
+				console.log(price)
 				//determine colour for each entry, from Ben Gardner https://stackoverflow.com/questions/35633618/chart-js-bar-chart-color-change-based-on-value
 				var colours = []
 				for(var i = 0; i < conditionName.length; i++){
@@ -252,7 +255,7 @@
 									var formatTooltip = "Buying Format: " + format[tooltipItems.index];
 									var conditionTooltip = "Condition: " + conditionName[tooltipItems.index];
 									var commentTootip = "Comments: " + comments[tooltipItems.index];
-									var priceTooltip = "Price: £" + tooltipItems.yLabel;
+									var priceTooltip = "Price: £" + tooltipItems.yLabel.toFixed(2);
 									  if(sold[tooltipItems.index] === "Unsold"){
 										var tooltip = ["UNSOLD", priceTooltip,timeTooltip,formatTooltip,conditionTooltip,commentTootip]; //storing all the value here
 										return tooltip; //return Array back to function to show out
