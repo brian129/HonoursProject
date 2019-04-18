@@ -86,11 +86,9 @@ module.exports = {
 					var options = {
 						shouldSort: true,
 						tokenize: true,
-						threshold: 0.4,
-						location: 0,
-						distance: 4,
+						threshold: 0.3,
+						distance: 0,
 						maxPatternLength: 32,
-						minMatchCharLength: 1,
 						keys: ["Name", "SubItem", "Comments"]
 					};
 					var fuse = new Fuse(results, options);
